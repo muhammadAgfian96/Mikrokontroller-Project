@@ -45,33 +45,28 @@ String Data;
 //############## START SETUP AWAL ###################
 void setup() {
   Serial.begin(115200);
-
   //-- servo
   servo_nutrisi.attach(servoNutrisi);
   servo_air.attach(servoAir);
+  //---- setting buzzer ----
+  pinMode(beep, OUTPUT);
+  digitalWrite(beep, LOW);
+  //----- Setup Awal Sensor -----
+  pinMode(TdsSensorPin, INPUT);
 
-  //-----setting pid-----
+  //-----SETTING PID-----
   Sp = 800.0; // set point
   Kp = 1.0; // kp
   Ki = 0.0; // ki
   Kd = 0.0; // kd
-
-
-  //---- setting buzzer ----
-  pinMode(beep, OUTPUT);
-  digitalWrite(beep, LOW);
-
-
-  //----- Setup Awal Sensor -----
-  pinMode(TdsSensorPin, INPUT);
-
-  //----- Setting Awal Waktu -----
+  
+  //----- SETTING AWAL WAKTU-----
   tahun = 2019; bulan = 10; tanggal = 10;
   jam = 17; menit = 57 ; detik = 0;
   myRTC.setDS1302Time(detik, menit, jam, 6, tanggal, bulan, tahun);
 
 
-  //----- Setting Awal SD CARD -----
+  //----- SETTING AWAL SD CARD -----
   NAMA_BERKAS = "nuys.txt";
   Serial.print("Mengecek SD CARD: ");
   if (!SD.begin(4)) {
@@ -80,6 +75,7 @@ void setup() {
   Serial.println("BISA!");
   //read_data();
 
+//---- SETTING KOLOM SDCARD ----
   xKolom = "tanngal;jam;ppm;ec;kontrol_pid";
   write_data(xKolom);
   delay(3000);
