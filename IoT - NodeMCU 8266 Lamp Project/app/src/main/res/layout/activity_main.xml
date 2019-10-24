@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#FFF"
+	tools:context=".MainActivity"
+	>
+
+	<ScrollView
+		android:id="@+id/scrollView2"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+
+			>
+			<!-- DAERAH KERJA -->
+
+			<LinearLayout
+				android:id="@+id/linearLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingLeft="16dp"
+				android:paddingRight="16dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
+
+				<!--  HEADER  -->
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="32dp"
+					android:orientation="horizontal"
+					android:weightSum="3">
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:gravity="center">
+
+						<ImageView
+							android:layout_width="100dp"
+							android:layout_height="100dp"
+							android:src="@drawable/logo" />
+
+					</LinearLayout>
+
+					<!-- TULISAN HEADER -->
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:layout_weight="2"
+						android:gravity="center"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="8dp"
+							android:text="@string/judul_Page"
+							android:textAlignment="center"
+							android:textSize="20sp"
+							android:textStyle="bold" />
+
+						<View
+							android:layout_width="match_parent"
+							android:layout_height="1dp"
+							android:layout_marginLeft="40dp"
+							android:layout_marginTop="10dp"
+							android:layout_marginRight="40dp"
+							android:background="#6A414141" />
+
+
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="8dp"
+							android:text="Internet of Things"
+							android:textAlignment="center"
+							android:textColor="@color/primaryBlue"
+							android:textSize="20sp"
+							android:textStyle="italic" />
+
+					</LinearLayout>
+
+
+				</LinearLayout>
+
+				<!-- MAIN -->
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+
+					android:layout_marginTop="32dp"
+					android:paddingBottom="20dp"
+					android:clipToPadding="false"
+					>
+
+					<!-- JUDUL MENU -->
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="@string/judul_Section"
+						android:textAlignment="center"
+						android:textColor="@color/primaryBlue"
+						android:textSize="26sp"
+						android:textStyle="normal" />
+
+					<!-- BARIS STATUS -->
+					<LinearLayout
+
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:clipToPadding="false"
+						android:orientation="horizontal"
+						android:paddingLeft="5dp"
+						android:paddingRight="5dp"
+						android:paddingBottom="10dp"
+						android:weightSum="2">
+
+
+						<!--						1 KOTAK PARAMETER ARUS-->
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="32dp"
+							android:layout_marginRight="16dp"
+							android:layout_weight="1"
+							android:background="@drawable/bg_status"
+							android:elevation="5dp"
+							android:orientation="vertical"
+							android:paddingLeft="16dp"
+							android:paddingTop="24dp"
+
+							android:paddingRight="16dp"
+							android:paddingBottom="24dp"
+
+							>
+
+							<!--							Pengukuran dan satuan-->
+							<LinearLayout
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:orientation="horizontal"
+
+								android:weightSum="4">
+
+								<TextView
+									android:layout_width="0dp"
+									android:layout_height="wrap_content"
+									android:layout_weight="3"
+									android:text="220.8"
+									android:textColor="#FFF"
+									android:textSize="24sp" />
+
+								<TextView
+									android:layout_width="0dp"
+									android:layout_height="wrap_content"
+									android:layout_weight="1"
+									android:text="Watt"
+									android:textColor="#FFF"
+									android:textSize="12sp" />
+
+							</LinearLayout>
+
+							<!--							judul "arus"-->
+							<TextView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:text="power"
+								android:textColor="#80FFFFFF"
+								android:textSize="16sp" />
+						</LinearLayout>
+
+						<!-- 1 KOTAK PARAMETER VOLTAGE-->
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="16dp"
+							android:layout_marginTop="32dp"
+							android:layout_weight="1"
+							android:background="@drawable/bg_status"
+							android:elevation="5dp"
+							android:orientation="vertical"
+							android:paddingLeft="16dp"
+							android:paddingTop="24dp"
+							android:paddingRight="16dp"
+							android:paddingBottom="24dp"
+
+							>
+
+							<!--							Pengukuran dan satuan-->
+							<LinearLayout
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:orientation="horizontal"
+
+								android:weightSum="4">
+
+								<TextView
+									android:layout_width="0dp"
+									android:layout_height="wrap_content"
+									android:layout_weight="3"
+									android:text="220"
+									android:textColor="#FFF"
+									android:textSize="24sp" />
+
+								<TextView
+									android:layout_width="0dp"
+									android:layout_height="wrap_content"
+									android:layout_weight="1"
+									android:text="cand"
+									android:textColor="#FFF"
+									android:textSize="12sp" />
+
+							</LinearLayout>
+
+							<!--							judul "arus"-->
+							<TextView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:text="cahaya"
+								android:textColor="#80FFFFFF"
+								android:textSize="16sp" />
+						</LinearLayout>
+
+
+					</LinearLayout>
+
+
+					<!-- BARIS BUTTON -->
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:clipToPadding="false"
+						android:orientation="horizontal"
+						android:paddingLeft="5dp"
+						android:paddingRight="5dp"
+						android:paddingBottom="10dp"
+						android:weightSum="2">
+
+
+						<!-- BUTTON ON -->
+						<LinearLayout
+							android:id="@+id/btn_on"
+							android:layout_width="0dp"
+							android:layout_height="60dp"
+							android:layout_marginTop="16dp"
+							android:layout_marginRight="20dp"
+							android:layout_weight="1"
+							android:background="@drawable/bg_button"
+							android:elevation="5dp"
+							android:orientation="vertical"
+							android:paddingLeft="32dp"
+							android:paddingTop="8dp"
+							android:paddingRight="32dp"
+							android:paddingBottom="10dp">
+
+							<!--	judul "voltage"-->
+							<TextView
+								android:id="@+id/btn_on_text"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="6dp"
+								android:text="ON"
+								android:textStyle="bold"
+								android:textAlignment="center"
+								android:textColor="@color/primaryBlue"
+								android:textSize="20sp" />
+						</LinearLayout>
+
+						<!-- BUTTON OFF -->
+						<LinearLayout
+							android:id="@+id/btn_off"
+							android:layout_width="0dp"
+							android:layout_height="60dp"
+							android:layout_marginLeft="20dp"
+							android:layout_marginTop="16dp"
+							android:layout_weight="1"
+							android:background="@drawable/bg_button"
+							android:elevation="5dp"
+							android:orientation="vertical"
+							android:paddingLeft="32dp"
+							android:paddingTop="8dp"
+							android:paddingRight="32dp"
+							android:paddingBottom="10dp"
+
+							>
+							<!--	judul "voltage"-->
+							<TextView
+								android:id="@+id/btn_off_text"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="6dp"
+								android:text="OFF"
+								android:textStyle="bold"
+								android:textAlignment="center"
+								android:textColor="@color/primaryBlue"
+								android:textSize="20sp" />
+						</LinearLayout>
+
+
+					</LinearLayout>
+
+					<!-- BUTTON SHOW GRAPH-->
+					<TextView
+						android:id="@+id/btn_graph"
+						android:layout_width="match_parent"
+						android:layout_height="60dp"
+						android:layout_marginLeft="5dp"
+						android:layout_marginTop="16dp"
+						android:layout_marginRight="5dp"
+						android:background="@drawable/bg_button"
+						android:elevation="5dp"
+						android:paddingTop="16dp"
+						android:text="SHOW GRAPH"
+						android:textAlignment="center"
+						android:textColor="@color/primaryBlue"
+						android:textSize="20sp" />
+
+
+				</LinearLayout>
+			</LinearLayout>
+
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+	</ScrollView>
+
+
+
+	<!-- FOOTER -->
+	<TextView
+		android:id="@+id/textView"
+		android:layout_width="match_parent"
+		android:layout_height="50dp"
+		android:background="@drawable/bg_footer"
+		android:paddingTop="15dp"
+		android:text="created by: agfn"
+		android:textAlignment="center"
+		android:textColor="#FFF"
+		app:layout_constraintBottom_toBottomOf="@+id/scrollView2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="colorPrimary">#008577</color>
+	<color name="colorPrimaryDark">#00574B</color>
+	<color name="colorAccent">#D81B60</color>
+
+<!--	mendaftarkan warna -->
+	<color name="primaryBlue">#00A2D8</color>
+	<color name="secondBlue">#57C9E9</color>
+	<color name="myGray">#7C878787</color>
+	<color name="greenNyala">#65E238</color>
+
+</resources>

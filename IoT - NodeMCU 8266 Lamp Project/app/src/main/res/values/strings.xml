@@ -1,0 +1,11 @@
+<resources>
+	<string name="app_name">Lamp Project</string>
+	<string name="judul_Page">Lamp IoT Monitoring</string>
+	<string name="judul_Section">Status Monitoring</string>
+	<string name="judul_page_graph">Graphic Monitoring</string>
+
+
+<!--	color-->
+	<string name="primBlue">#57C9E9</string>
+
+</resources>

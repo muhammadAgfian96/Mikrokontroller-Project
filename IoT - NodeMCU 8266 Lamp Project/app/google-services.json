@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "499899763427",
+    "firebase_url": "https://iot-ruangngoprek.firebaseio.com",
+    "project_id": "iot-ruangngoprek",
+    "storage_bucket": "iot-ruangngoprek.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499899763427:android:531770907033a07eb593d6",
+        "android_client_info": {
+          "package_name": "com.blogspot.mekatronika.lampproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499899763427-mc8togmnb883i277pv4e51cvmh5d8orp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blogspot.mekatronika.lampproject",
+            "certificate_hash": "a95e9ee715bb48e48fba7cd1d49ff4c01d26b4af"
+          }
+        },
+        {
+          "client_id": "499899763427-qhibpd1ebgpghq9fka6ku7kugdf7pn2j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXsSqDjRkmRw4NJStd_Ih6LG0inJy1Ank"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499899763427-qhibpd1ebgpghq9fka6ku7kugdf7pn2j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
