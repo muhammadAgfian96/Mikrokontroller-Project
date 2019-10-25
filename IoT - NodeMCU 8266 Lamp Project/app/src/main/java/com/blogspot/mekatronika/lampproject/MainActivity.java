@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -22,13 +23,16 @@ public class MainActivity extends AppCompatActivity {
 
 //    inisialisasi button
     TextView btn_graph, btn_on_text, btn_off_text;
+    TextView txt_Cahaya;
     LinearLayout btn_on, btn_off;
 
 //    inisialisasi firebase
     FirebaseDatabase database;
-    DatabaseReference refLamp;
+    DatabaseReference refLamp, refCahaya;
+    Query myCahaya;
 
-// inilisiasi
+
+    // inilisiasi
     boolean kondisi;
 
     @Override
@@ -41,10 +45,18 @@ public class MainActivity extends AppCompatActivity {
         btn_off = findViewById(R.id.btn_off);
         btn_on_text = findViewById(R.id.btn_on_text);
         btn_off_text = findViewById(R.id.btn_off_text);
+        txt_Cahaya = findViewById(R.id.txt_Cahaya);
+
+        //
+        database = FirebaseDatabase.getInstance();
+        refCahaya = database.getReference("Ruang_Ngoprek").child("paket_json"); // path dari firebase
+        myCahaya =refCahaya.limitToLast(5); // membatasi mengambil data (2000 dari terakhir)
 
 
         database = FirebaseDatabase.getInstance();
         refLamp = database.getReference("Ruang_Ngoprek").child("kondisi");
+
+
 
 
 //        Cek Kondisi Lamp
@@ -88,31 +100,55 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//    BUTTON ON DI PENCET
+        txt_Cahaya.setTextColor(Color.RED);
+
+        //      Cek the Last Data
+        myCahaya.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                txt_Cahaya.setTextColor(Color.WHITE);
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    String cahaya = ds.child("Set_Data").getValue().toString();
+
+                    if(!cahaya.isEmpty()){
+                        txt_Cahaya.setText(cahaya);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                txt_Cahaya.setTextColor(Color.RED);
+
+            }
+        });
+
+        //    BUTTON ON DI PENCET
         btn_on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 refLamp.setValue("ON");
             }
         });
-// BUTTON OFF DI PENCET
+
+        //    BUTTON OFF DI PENCET
         btn_off.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 refLamp.setValue("OFF");
             }
         });
 
 
-//    BUTTON GRAPH DI PENCET
-    btn_graph.setOnClickListener(new View.OnClickListener() {
+        //    BUTTON GRAPH DI PENCET
+        btn_graph.setOnClickListener(new View.OnClickListener() {
         @Override
-        public void onClick(View view) {
-            Intent goGraph = new Intent(MainActivity.this, graph.class);
-            startActivity(goGraph);
-        }
-    });
+            public void onClick(View view) {
+                Intent goGraph = new Intent(MainActivity.this, graph.class);
+                startActivity(goGraph);
+            }
+        });
     }
 
 

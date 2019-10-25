@@ -1,5 +1,6 @@
 package com.blogspot.mekatronika.lampproject;
 
+// mengimport package yang diperlukan
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,16 +38,15 @@ import java.util.Locale;
 
 public class graph extends AppCompatActivity {
 
-    //    inisialisasi grafik
+    // inisialisasi untuk keperluan grafik
     LineChart mChart;
     ArrayList<Entry> yData;
     long[] timeStamp =new long[3000];
+    int i;
 
     // inisialisasi firebase
     FirebaseDatabase database;
     DatabaseReference refCahaya;
-
-    int i = 0;
 
 
     @Override
@@ -55,7 +55,6 @@ public class graph extends AppCompatActivity {
         setContentView(R.layout.activity_graph);
 
         mChart = (LineChart) findViewById(R.id.line_chart1);
-
 
 
         /*
@@ -74,36 +73,36 @@ public class graph extends AppCompatActivity {
         mChart.invalidate();
         */
 
+
+
         Query myCahaya;
-
         database = FirebaseDatabase.getInstance();
-        refCahaya = database.getReference("Ruang_Ngoprek").child("paket_json");
-        myCahaya =refCahaya.limitToLast(2000);
+        refCahaya = database.getReference("Ruang_Ngoprek").child("paket_json"); // path dari firebase
+        myCahaya =refCahaya.limitToLast(2000); // membatasi mengambil data (2000 dari terakhir)
 
-    myCahaya.addValueEventListener(new ValueEventListener() {
+        myCahaya.addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             if (dataSnapshot != null){
 
                 yData = new ArrayList<>();
-
-
                 i=0;
 
+                // looping untuk mendapatkan semua data yang ada di children
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     String yLight = ds.child("Set_Data").getValue().toString();
                     String tStamp = ds.child("Timestamp").getValue().toString();
 
+                    // cek dulu apakah tStamp ada isi/kosong
                     if (!tStamp.isEmpty()){
+                        // tStamp ada isi
+                        Float sValue = Float.parseFloat(yLight); //convert string to int
+                        Long tStamp_int = Long.parseLong(tStamp); // convert string to long
 
-                        Float sValue = Float.parseFloat(yLight);
-                        Long tStamp_int = Long.parseLong(tStamp);
-
-                        timeStamp[i] = tStamp_int;
-                        yData.add(new Entry(i, sValue));
+                        timeStamp[i] = tStamp_int; //menyimpan tStamp_int pada array timeStamp
+                        yData.add(new Entry(i, sValue)); // melakukan adding data
                         i += 1;
                     }
-
                 }
 
 
@@ -203,7 +202,6 @@ public class graph extends AppCompatActivity {
                 mChart.notifyDataSetChanged();
                 mChart.invalidate();
 
-//                mChart.setVisibleXRangeMaximum(3600000);
                 mChart.setVisibleXRangeMaximum(20);
                 mChart.moveViewToX(data.getXMax());
 

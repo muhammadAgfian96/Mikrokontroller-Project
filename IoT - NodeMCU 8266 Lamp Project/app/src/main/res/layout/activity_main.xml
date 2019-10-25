@@ -219,10 +219,11 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 								android:weightSum="4">
 
 								<TextView
+									android:id="@+id/txt_Cahaya"
 									android:layout_width="0dp"
 									android:layout_height="wrap_content"
 									android:layout_weight="3"
-									android:text="220"
+									android:text="load.."
 									android:textColor="#FFF"
 									android:textSize="24sp" />
 
