@@ -10,6 +10,7 @@
 	android:background="#FFF"
 	tools:context=".MainActivity"
 	>
+<!--constrain > scroll view > constrain > Linear Layout -->
 
 <!--	SCROLL VIEW
 untuk Nge scroll klo kontennya kepanjangan kebawah-->
@@ -40,7 +41,7 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintTop_toTopOf="parent">
 
-				<!--  HEADER  -->
+				<!-- MULAI HEADER  -->
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -104,8 +105,9 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 
 
 				</LinearLayout>
+				<!-- AKHIR HEADER  -->
 
-				<!-- MAIN -->
+				<!-- MAIN CONTENT -->
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -335,19 +337,16 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 						android:textAlignment="center"
 						android:textColor="@color/primaryBlue"
 						android:textSize="20sp" />
-
-
 				</LinearLayout>
+				<!-- AKHIR MAIN CONTENT -->
 
 			</LinearLayout>
-
 		</androidx.constraintlayout.widget.ConstraintLayout>
-
 	</ScrollView>
 
 
 
-	<!-- FOOTER -->
+	<!-- MULAI FOOTER -->
 	<TextView
 		android:id="@+id/textView"
 		android:layout_width="match_parent"
@@ -358,5 +357,6 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 		android:textAlignment="center"
 		android:textColor="#FFF"
 		app:layout_constraintBottom_toBottomOf="@+id/scrollView2" />
+	<!-- AKHIR FOOTER -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
