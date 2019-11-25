@@ -9,7 +9,9 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
-		<activity android:name=".graph"></activity>
+		<activity android:name=".graph_new"></activity>
+		<activity android:name=".test_kosong" />
+		<activity android:name=".graph" />
 		<activity android:name=".MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

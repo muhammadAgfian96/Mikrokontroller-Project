@@ -104,6 +104,7 @@
 			android:layout_marginTop="16dp"
 			android:text="a few second ago ..."
 			android:textAlignment="center" />
+
 	</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

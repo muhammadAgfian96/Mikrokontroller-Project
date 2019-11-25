@@ -54,15 +54,22 @@ public class graph extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
+        // mendefinisikan ruang mChart sebagai tempat plotting
         mChart = (LineChart) findViewById(R.id.line_chart1);
 
 
-        /*
-        // Definisiin line pertama dan add data
-        LineDataSet lineDataSet1 = new LineDataSet(dataValues1(), "Cahaya");
-        // styling
 
-        // add ad data
+        //----- DASAR PLOTTING ----
+        // Definisiin line pertama dan add data
+        //dataValues1() ==> berisi data (x,y) yang akan diplot
+        LineDataSet lineDataSet1 = new LineDataSet(dataValues1(), "Cahaya");
+
+        // styling untuk data yang berada di linedataset1
+        lineDataSet1.setLineWidth(2);
+        lineDataSet1.setColor(Color.parseColor("#00A2D8"));
+
+
+        // memasukkan isi lineDataSet1 to be ArrayList
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet1);
 
@@ -71,10 +78,9 @@ public class graph extends AppCompatActivity {
         LineData data = new LineData(dataSets);
         mChart.setData(data); // memasukkan data ke mChart
         mChart.invalidate();
-        */
 
 
-
+        /*
         Query myCahaya;
         database = FirebaseDatabase.getInstance();
         refCahaya = database.getReference("Ruang_Ngoprek").child("paket_json"); // path dari firebase
@@ -157,7 +163,7 @@ public class graph extends AppCompatActivity {
 
                 // ** Setting Axis X
                 XAxis xAxis = mChart.getXAxis();
-                xAxis.setLabelRotationAngle(-45);
+                xAxis.setLabelRotationAngle(-60);
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                 xAxis.setTextSize(12);
                 xAxis.setTextColor(Color.parseColor("#57C9E9"));
@@ -182,7 +188,7 @@ public class graph extends AppCompatActivity {
 
                 // # Mengatur Description graph
                 Description desc = new Description();
-                desc.setText("Cahaya di Kamar");
+                desc.setText("Markas Ranger");
                 desc.setTextColor(Color.parseColor("#00A2D8"));
                 desc.setTextSize(14);
                 desc.setYOffset(8);
@@ -202,7 +208,7 @@ public class graph extends AppCompatActivity {
                 mChart.notifyDataSetChanged();
                 mChart.invalidate();
 
-                mChart.setVisibleXRangeMaximum(20);
+                mChart.setVisibleXRangeMaximum(40);
                 mChart.moveViewToX(data.getXMax());
 
             }else {
@@ -218,12 +224,7 @@ public class graph extends AppCompatActivity {
 
         }
     });
-
-
-
-
-
-
+        */
 
     }
 
@@ -234,7 +235,6 @@ public class graph extends AppCompatActivity {
         dataVals.add(new Entry(2,40));
         dataVals.add(new Entry(3,10));
         dataVals.add(new Entry(4,25));
-
         return dataVals;
     }
 
@@ -248,12 +248,12 @@ public class graph extends AppCompatActivity {
     private class FormatterX_AxisValues extends ValueFormatter{
         @Override
         public String getAxisLabel(float value, AxisBase axis) {
-
-            axis.setLabelCount(5, true);
+            // tujuannya untuk memformat ulang / menulis ulang X Axis dengan tanggal (tadinya index)
+            axis.setLabelCount(10, true);
 
             if(timeStamp != null){
                 Date date = new Date((long) timeStamp[(int) Math.floor(value)]);
-                SimpleDateFormat sdf = new SimpleDateFormat("dd HH:mm:ss", Locale.ENGLISH);
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH);
                 return sdf.format(date);}
             else{
                 return String.valueOf(value);
@@ -261,17 +261,5 @@ public class graph extends AppCompatActivity {
 
         }
     }
-
-
-    private long diffTime(Long startTime, Long endTime){
-        Long diff = 0L;
-        Date start = new Date(startTime);
-        Date end = new Date(endTime);
-
-        diff = start.getTime() - end.getTime();
-
-        return diff;
-    }
-
 }
 

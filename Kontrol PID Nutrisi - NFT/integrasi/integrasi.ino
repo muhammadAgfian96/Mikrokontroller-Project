@@ -55,19 +55,19 @@ void setup() {
   pinMode(TdsSensorPin, INPUT);
 
   //-----SETTING PID-----
-  Sp = 800.0; // set point
-  Kp = 1.0; // kp
-  Ki = 0.0; // ki
-  Kd = 0.0; // kd
-  
+  Sp = 840.0; // set point
+  Kp = 3.85; // kp
+  Ki = 0.137; // ki
+  Kd = 26.95; // kd
+
   //----- SETTING AWAL WAKTU-----
-  tahun = 2019; bulan = 10; tanggal = 10;
-  jam = 17; menit = 57 ; detik = 0;
+  tahun = 2019; bulan = 10; tanggal = 30;
+  jam = 23; menit = 0 ; detik = 0;
   myRTC.setDS1302Time(detik, menit, jam, 6, tanggal, bulan, tahun);
 
 
   //----- SETTING AWAL SD CARD -----
-  NAMA_BERKAS = "nuys.txt";
+  NAMA_BERKAS = "nuyyy.txt";
   Serial.print("Mengecek SD CARD: ");
   if (!SD.begin(4)) {
     Serial.println("GAGAL!"); return;
@@ -75,7 +75,7 @@ void setup() {
   Serial.println("BISA!");
   //read_data();
 
-//---- SETTING KOLOM SDCARD ----
+  //---- SETTING KOLOM SDCARD ----
   xKolom = "tanngal;jam;ppm;ec;kontrol_pid";
   write_data(xKolom);
   delay(3000);
@@ -87,16 +87,16 @@ void setup() {
 void loop() {
   // memanggil fungsi untuk update data waktu
   sensor_tds();
-//  jalakan_kontrol(aktual, Setppint, val Kp, val Ki, val Kd);
+  //  jalakan_kontrol(aktual, Setppint, val Kp, val Ki, val Kd);
   jalakan_kontrol(tdsValue, Sp, Kp, Ki, Kd);
   get_time();
-  
+
   // tulis data jika berubah
   if (tdsValueSebelumnya != tdsValue) {
     tdsValueSebelumnya = tdsValue;
     write_data(xData);
   }
-  
+
   delay(200);
 }
 
@@ -194,71 +194,77 @@ void sensor_tds() {
     float compensationVolatge = averageVoltage / compensationCoefficient; //temperature compensation
     tdsValue = (133.42 * compensationVolatge * compensationVolatge * compensationVolatge - 255.86 * compensationVolatge * compensationVolatge + 857.39 * compensationVolatge) * 0.5; //convert voltage value to tds value
     tdsValue = (2.0702 * tdsValue) - 255.91; //hasil persamaan kalibrasi
-    //Serial.print("voltage:");
-    //Serial.print(averageVoltage,2);
-    //Serial.print("V   ");
-    Serial.print("# TDS Value:");
-    Serial.print(tdsValue, 0);
-    Serial.println("ppm");
-  }
-}
+    //jika tds < 0
+    if (tdsValue < 0) {
+      tdsValue = 0;
+      }
 
-
-//### FUNGSI PID ####
-void jalakan_kontrol(float aktual, float Sp, float Kp, float Ki, float Kd) {
-
-  float timeChange = (millis() - lasttime) / 1000;
-
-  //Error 800 - aktual
-  // E + maka dia kurang nutrisi => tambah NUTRISI
-  // E - maka dia kelebihan nutrisi => tambah AIR
-
-  err = Sp - aktual; //set point - nilai sensor aktual
-  errSum = (err * timeChange);
-  float dErr = (err - lasterr) / timeChange;
-
-  // rumus pid nya
-  PID = ((Kp * err) + (Ki * errSum) + (Kd * dErr));
-
-  //----- Nilai PID di oper ke PWM servo---
-  // E + maka dia kurang nutrisi => tambah NUTRISI  //servoNutrisi 10 // 40-90
-  // E - maka dia kelebihan nutrisi => tambah AIR  //servoAir 3 // 80-130
-
-
-  if (err < 0) {
-    PID = PID * -1;
-    if (PID > 90) {
-      PID = 90; // E- -> AIR+
+      //Serial.print("voltage:");
+      //Serial.print(averageVoltage,2);
+      //Serial.print("V   ");
+      Serial.print("# TDS Value:");
+      Serial.print(tdsValue, 0);
+      Serial.println("ppm");
     }
-    else if (PID < 40) {
-      PID = 40;
-    }
-    jalankan_servo_air(PID+40);
-  }
-  else {
-    if (PID > 90) {
-      PID = 90; // E+ -> NUTRISI+
-    }
-    else if (PID < 40) {
-      PID = 40;
-    }
-    jalankan_servo_nutrisi(PID);
   }
 
-  lasterr = err;
-  lasttime = millis();
 
-}
+  //### FUNGSI PID ####
+  void jalakan_kontrol(float aktual, float Sp, float Kp, float Ki, float Kd) {
 
-void jalankan_servo_nutrisi(float nilai_pid) {
-  int val_pid = int(nilai_pid);
-  servo_nutrisi.write(val_pid);
-  delay(15);
-}
+    float timeChange = (millis() - lasttime) / 1000;
 
-void jalankan_servo_air(float nilai_pid) {
-  int val_pid = int(nilai_pid);
-  servo_air.write(val_pid);
-  delay(15);
-}
+    //Error 800 - aktual
+    // E + maka dia kurang nutrisi => tambah NUTRISI
+    // E - maka dia kelebihan nutrisi => tambah AIR
+
+    err = Sp - aktual; //set point - nilai sensor aktual
+    errSum = (err * timeChange);
+    float dErr = (err - lasterr) / timeChange;
+
+    // rumus pid nya
+    PID = ((Kp * err) + (Ki * errSum) + (Kd * dErr));
+
+    //----- Nilai PID di oper ke PWM servo---
+    // E + maka dia kurang nutrisi => tambah NUTRISI  //servoNutrisi 10 // 40-90
+    // E - maka dia kelebihan nutrisi => tambah AIR  //servoAir 3 // 80-130
+
+
+    if (err < 0) {
+      PID = PID * -1;
+      PID = map(PID, 20, 90, 40, 130);
+      if (PID > 130) {
+        PID = 130; // E- -> AIR+
+      }
+      else if (PID < 40) {
+        PID = 40;
+      }
+      jalankan_servo_air(PID);
+    }
+    else {
+      if (PID > 90) {
+        PID = 90; // E+ -> NUTRISI+
+      }
+      else if (PID < 20) {
+        PID = 20;
+      }
+      jalankan_servo_nutrisi(PID);
+    }
+
+    lasterr = err;
+    lasttime = millis();
+
+  }
+
+  void jalankan_servo_nutrisi(float nilai_pid) {
+    int val_pid = int(nilai_pid);
+    servo_nutrisi.write(val_pid);
+    delay(15);
+  }
+
+  void jalankan_servo_air(float nilai_pid) {
+    int val_pid = int(nilai_pid);
+    servo_air.write(val_pid);
+    delay(15);
+  }
 

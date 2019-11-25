@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference refLamp, refCahaya;
     Query myCahaya;
 
-
     // inilisiasi
     boolean kondisi;
 
@@ -40,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn_graph = findViewById(R.id.btn_graph);
+        btn_graph = findViewById(R.id.btn_graph); //fungsi buat ngakses id yang ada XML
+
         btn_on = findViewById(R.id.btn_on);
         btn_off = findViewById(R.id.btn_off);
         btn_on_text = findViewById(R.id.btn_on_text);
@@ -55,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         refLamp = database.getReference("Ruang_Ngoprek").child("kondisi");
-
-
 
 
 //        Cek Kondisi Lamp
@@ -99,10 +97,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         txt_Cahaya.setTextColor(Color.RED);
 
-        //      Cek the Last Data
+        //  Cek the Last Data
         myCahaya.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -110,13 +107,14 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     String cahaya = ds.child("Set_Data").getValue().toString();
 
+                    //cek isi cahaya
                     if(!cahaya.isEmpty()){
-                        txt_Cahaya.setText(cahaya);
+                        txt_Cahaya.setText(cahaya); //ubah txt_cahaya jadi data yang didapat
                     }
                 }
-
             }
 
+            // bila data gagal diambil dari Firebase
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 txt_Cahaya.setTextColor(Color.RED);

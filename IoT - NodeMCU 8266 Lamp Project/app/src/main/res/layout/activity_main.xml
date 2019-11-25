@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- main layout pake constrain -->
-<androidx.constraintlayout.widget.ConstraintLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="#FFF"
-	tools:context=".MainActivity"
-	>
-<!--constrain > scroll view > constrain > Linear Layout -->
+	tools:context=".MainActivity">
+	<!--constrain > scroll view > constrain > Linear Layout -->
 
-<!--	SCROLL VIEW
-untuk Nge scroll klo kontennya kepanjangan kebawah-->
+	<!--	SCROLL VIEW
+	untuk Nge scroll klo kontennya kepanjangan kebawah-->
 	<ScrollView
 		android:id="@+id/scrollView2"
 		android:layout_width="match_parent"
@@ -49,9 +47,9 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 					android:orientation="horizontal"
 					android:weightSum="3">
 
-<!--wight sum digunakan untuk membagi rata width dari linear keseluruhan -->
-<!--kita atur dulu di parentnya, widthnya dibagi berapa -->
-<!--nanti childnya diatur dapat berapa bagian dengan layout_weight -->
+					<!--wight sum digunakan untuk membagi rata width dari linear keseluruhan -->
+					<!--kita atur dulu di parentnya, widthnya dibagi berapa -->
+					<!--nanti childnya diatur dapat berapa bagian dengan layout_weight -->
 					<LinearLayout
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
@@ -111,12 +109,11 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:orientation="vertical"
-
 					android:layout_marginTop="32dp"
-					android:paddingBottom="20dp"
+
 					android:clipToPadding="false"
-					>
+					android:orientation="vertical"
+					android:paddingBottom="20dp">
 
 					<!-- JUDUL MENU -->
 					<TextView
@@ -284,10 +281,10 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 								android:layout_height="wrap_content"
 								android:layout_marginTop="6dp"
 								android:text="ON"
-								android:textStyle="bold"
 								android:textAlignment="center"
 								android:textColor="@color/primaryBlue"
-								android:textSize="20sp" />
+								android:textSize="20sp"
+								android:textStyle="bold" />
 						</LinearLayout>
 
 						<!-- BUTTON OFF -->
@@ -307,16 +304,17 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 							android:paddingBottom="10dp"
 
 							>
+
 							<TextView
 								android:id="@+id/btn_off_text"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:layout_marginTop="6dp"
 								android:text="OFF"
-								android:textStyle="bold"
 								android:textAlignment="center"
 								android:textColor="@color/primaryBlue"
-								android:textSize="20sp" />
+								android:textSize="20sp"
+								android:textStyle="bold" />
 
 						</LinearLayout>
 
@@ -326,6 +324,7 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 					<!-- BUTTON SHOW GRAPH-->
 					<TextView
 						android:id="@+id/btn_graph"
+
 						android:layout_width="match_parent"
 						android:layout_height="60dp"
 						android:layout_marginLeft="5dp"
@@ -338,13 +337,14 @@ untuk Nge scroll klo kontennya kepanjangan kebawah-->
 						android:textAlignment="center"
 						android:textColor="@color/primaryBlue"
 						android:textSize="20sp" />
+
 				</LinearLayout>
+
 				<!-- AKHIR MAIN CONTENT -->
 
 			</LinearLayout>
 		</androidx.constraintlayout.widget.ConstraintLayout>
 	</ScrollView>
-
 
 
 	<!-- MULAI FOOTER -->
